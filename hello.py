@@ -22,13 +22,26 @@
 
 #Activity 3:
 
-followers = 100
+# followers = 100
 
-followers += 50  # Increase followers by 50
-print("Day 1:", followers)
+# followers += 50  # Increase followers by 50
+# print("Day 1:", followers)
 
-followers += 20  # Increase followers by 20
-print("Day 2:", followers)
+# followers += 20  # Increase followers by 20
+# print("Day 2:", followers)
 
-followers -= 10  # Decrease followers by 10
-print("Day 3:", followers)
+# followers -= 10  # Decrease followers by 10
+# print("Day 3:", followers)
+
+
+#Activity 4:
+
+username = input("Enter username: ")
+age = int(input("Enter age: "))
+category = input("Enter Content category: ")
+
+print("\nInstagram Profile")
+print("===========")
+print("Username:", username)
+print("Age:", age)
+print("Content Category:", category)
