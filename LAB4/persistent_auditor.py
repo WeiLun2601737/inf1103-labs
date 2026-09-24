@@ -24,14 +24,23 @@ def generate_report(history1,inventory2,failedentry3, delivery4,totaltax5):
     print("Total Stock:", inventory2)
     print("Number of Failed/Rejected Entries:", failedentry3)
     print("Number of Successful Deliveries:", delivery4)
-    print("Total Tax: $", f"{totaltax:.2f}")
-#def load_inventory():
-    
+    print("Total Tax: $", f"{totaltax5:.2f}")
+
+def save_inventory(history1, filename = "inventory.txt"):
+   count = 1
+   with open(filename, "r") as file:
+      for line in file: 
+            if line.startswith("Stock History "):
+                count += 1
+   with open(filename, "a") as file:
+    file.write("Stock History " + str(count) + ":" + str(history1) + "\n")
             
-#def save_inventory():
+def load_inventory(filename = "inventory.txt"):
+     with open(filename, "r") as file:
+      data = file.read()
+      print(data, end="")
 
 inventory = 0
-count = 1
 failedentry = 0
 delivery = 0
 totaltax = 0
@@ -51,21 +60,12 @@ while True:
     totaltax += calculate_tax(int(stock))
     delivery += 1
 
+save_inventory(history)
 
-with open("inventory.txt", "r") as file:
-      for line in file: 
-            if line.startswith("Stock History "):
-                count += 1
-      
-with open("inventory.txt", "a") as file:
-    
-        file.write("Stock History " + str(count) + ":" + str(history) + "\n")
 print("\n================================")
 print("Order History:")
 print("================================")
-with open("inventory.txt", "r") as file:
-      data = file.read()
-print(data, end="")
+load_inventory()
 print("================================")
 generate_report(history, inventory, failedentry, delivery, totaltax)
 
