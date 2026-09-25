@@ -27,13 +27,17 @@ def generate_report(history1,inventory2,failedentry3, delivery4,totaltax5):
     print("Total Tax: $", f"{totaltax5:.2f}")
 
 def save_inventory(history1, filename = "inventory.txt"):
-   count = 1
-   with open(filename, "r") as file:
-      for line in file: 
-            if line.startswith("Stock History "):
-                count += 1
-   with open(filename, "a") as file:
-    file.write("Stock History " + str(count) + ":" + str(history1) + "\n")
+    count = 1
+    try:
+      with open(filename, "r") as file:
+          for line in file: 
+                if line.startswith("Stock History "):
+                    count += 1
+    except FileNotFoundError:
+        pass
+
+    with open(filename, "a") as file:
+        file.write("Stock History " + str(count) + ":" + str(history1) + "\n")
             
 def load_inventory(filename = "inventory.txt"):
      with open(filename, "r") as file:
