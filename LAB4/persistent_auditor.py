@@ -1,43 +1,44 @@
 def get_valid_input():
-    stock = input ("Enter stock quantity (Type 'Quit' to exit): ")
-
-    if stock.lower() == "quit":
+    itemname = input("Enter item name (Type 'Quit' to exit): ")
+    if itemname.lower() == "quit":
             return "quit"
-    
+
+    if itemname.isdigit():
+            print ("Error: Enter a valid item name.")
+            return None
+
+    if itemname.strip() == "":
+            print ("Error: Item name cannot be empty.")
+            return None
+
+    stock = input ("Enter stock quantity: ")
+
     if not stock.isdigit():
             print ("Error: Enter a valid number.")
             return None
 
-    return int(stock)
+    return (itemname, int(stock))
 
-def process_delivery(current_total,new_value):
-      current_total += new_value
-      return current_total
-
-def calculate_tax(stock):
-    tax = stock * 0.10
-    return tax
-
-def generate_report(history1,inventory2,failedentry3, delivery4,totaltax5):
-    print("\nNew Stock Added:")
-    print(history1)
-    print("Total Stock:", inventory2)
-    print("Number of Failed/Rejected Entries:", failedentry3)
+def generate_report(history1,failedentry3, delivery4):
+    print("\nNew Order Added:")
+    for itemname, stock in history1:
+        print(f"Item: {itemname}, Stock: {stock}")
+    print("\nNumber of Failed/Rejected Entries:", failedentry3)
     print("Number of Successful Deliveries:", delivery4)
-    print("Total Tax: $", f"{totaltax5:.2f}")
+    print("\nOrder successfully saved to inventory.txt")
 
 def save_inventory(history1, filename = "inventory.txt"):
     count = 1
     try:
       with open(filename, "r") as file:
           for line in file: 
-                if line.startswith("Stock History "):
+                if line.startswith("Order Number"):
                     count += 1
     except FileNotFoundError:
         pass
 
     with open(filename, "a") as file:
-        file.write("Stock History " + str(count) + ":" + str(history1) + "\n")
+        file.write("Order Number " + str(count) + ":" + str(history1) + "\n")
             
 def load_inventory(filename = "inventory.txt"):
      with open(filename, "r") as file:
@@ -47,21 +48,18 @@ def load_inventory(filename = "inventory.txt"):
 inventory = 0
 failedentry = 0
 delivery = 0
-totaltax = 0
 history = []
     
 while True:
-    stock = get_valid_input()
-    if stock == "quit":
-          break
-    if stock is None:
+    result = get_valid_input()
+    if result == "quit":
+        break
+    if result is None:
         failedentry += 1
         continue
 
-    history.append(int(stock))
-
-    inventory = process_delivery(inventory, int(stock))
-    totaltax += calculate_tax(int(stock))
+    itemname, stock = result
+    history.append((itemname, stock))
     delivery += 1
 
 save_inventory(history)
@@ -71,7 +69,7 @@ print("Order History:")
 print("================================")
 load_inventory()
 print("================================")
-generate_report(history, inventory, failedentry, delivery, totaltax)
+generate_report(history, failedentry, delivery)
 
 
 
