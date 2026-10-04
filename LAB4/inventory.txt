@@ -1,0 +1,4 @@
+
+Order Number 1:[('wireless mouse', 2), ('Computer', 2), ('Keyboard', 9)]
+Order Number 2:[('Wireless Mouse', 2), ('Keyboard', 1)]
+Order Number 3:[('USB CABLE ', 3)]

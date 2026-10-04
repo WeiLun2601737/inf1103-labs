@@ -1,0 +1,26 @@
+[
+ {
+  "ID": "P001",
+  "Name": "Cookie",
+  "Price": 22.0,
+  "Stock": 9
+ },
+ {
+  "ID": "P002",
+  "Name": "Monster",
+  "Price": 99.0,
+  "Stock": 8
+ },
+ {
+  "ID": "P003",
+  "Name": "Cream",
+  "Price": 18.9,
+  "Stock": 2
+ },
+ {
+  "ID": "P004",
+  "Name": "L",
+  "Price": 10.0,
+  "Stock": 1
+ }
+]
