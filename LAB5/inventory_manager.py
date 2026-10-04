@@ -81,12 +81,22 @@ def update_stock(new_products):
                     except ValueError:
                             print("Error: Stock quantity must be a number.")
         print("Product ID not found. Please try again.")
-
-def new_func():
-    return
                         
-def search_product():
-    pass
+def search_product(new_products):
+    while True:
+        print("Search Product")
+        product_id = input("Enter Product ID: ").strip().upper()
+        for data in new_products:
+            if product_id == data["ID"]:
+                print("\nProduct Found")
+                print("------------------------------------------------")
+                print("ID: ", data["ID"])
+                print("Name: ", data["Name"])
+                print("Price: ", data["Price"])
+                print("Stock: ", data["Stock"])
+                print("------------------------------------------------")
+                return
+        print("Product ID not found. Please try again.")
 
 def display_all(new_products):
         if len(new_products) == 0:
@@ -99,8 +109,6 @@ def display_all(new_products):
                 + f'Price, ${value["Price"]:.2f}'+ "|" 
                 + "Stock", value["Stock"]
                 )
-        
-
 
 def load_inventory(filename = "inventory.json"):
     try:
@@ -134,7 +142,7 @@ while True:
     elif option == "3":
         update_stock(new_products)
     elif option == "4":
-        search_product()
+        search_product(new_products)
     elif option == "5":
         save_inventory(new_products)
         print("Saving Inventory...")
