@@ -1,9 +1,10 @@
 import json
-
-def menu():
+def heading():
     print("========================================")
     print("INVENTORY MANAGEMENT SYSTEM")
     print("========================================")
+
+def menu():
 
     print("----------- MENU -----------")
     print("1. Display All Product")
@@ -96,7 +97,8 @@ def search_product(new_products):
                 print("Stock: ", data["Stock"])
                 print("------------------------------------------------")
                 return
-        print("Product ID not found. Please try again.")
+            
+        print("\nProduct ID not found. Please try again.\n")
 
 def display_all(new_products):
         if len(new_products) == 0:
@@ -104,16 +106,19 @@ def display_all(new_products):
             return
         for value in new_products:
             print(
-                "ID:", value["ID"] + "|" + 
-                "Name:", value["Name"] + "|" 
-                + f'Price, ${value["Price"]:.2f}'+ "|" 
-                + "Stock", value["Stock"]
+                 f'ID: {value["ID"]} | '
+                 f'Name: {value["Name"]} | '
+                 f'Price: ${value["Price"]:.2f} | '
+                 f'Stock: {value["Stock"]}'
                 )
 
 def load_inventory(filename = "inventory.json"):
     try:
         with open (filename,"r") as file:
-            return json.load(file)
+            data = json.load(file)
+        print("\nInventory.json found.")
+        print("Inventory loaded successfully.\n")
+        return data
     except FileNotFoundError:
         print("Inventory not Found.")
         return []
@@ -126,12 +131,14 @@ def save_inventory(new_products, filename = "inventory.json"):
     try:
         with open(filename, "w") as file:
             json.dump(new_products, file, indent = 1)
+        print("Inventory saved to inventory.json.")
     except:
         print("Failed to save inventory to inventory.json")
 
+heading()
 new_products = load_inventory()
-
 menu()
+
 while True:
     option = input("\nEnter Option: ").strip()
 
@@ -144,9 +151,8 @@ while True:
     elif option == "4":
         search_product(new_products)
     elif option == "5":
-        save_inventory(new_products)
         print("Saving Inventory...")
-        print("Inventory saved to inventory.json.")
+        save_inventory(new_products)
     elif option == "6":
         save_inventory(new_products)
         print("Saving inventory before exit...")
