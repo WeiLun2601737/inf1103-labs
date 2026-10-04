@@ -84,8 +84,7 @@ def update_stock(new_products):
         print("Product ID not found. Please try again.")
                         
 def search_product(new_products):
-    while True:
-        print("Search Product")
+        print("\nSearch Product")
         product_id = input("Enter Product ID: ").strip().upper()
         for data in new_products:
             if product_id == data["ID"]:
@@ -98,12 +97,14 @@ def search_product(new_products):
                 print("------------------------------------------------")
                 return
             
-        print("\nProduct ID not found. Please try again.\n")
+        print("\nProduct Not Found\n")
 
 def display_all(new_products):
         if len(new_products) == 0:
             print("Inventory is empty")
             return
+        print("\nCurrent Inventory")
+        print("------------------------------------------------")
         for value in new_products:
             print(
                  f'ID: {value["ID"]} | '
@@ -111,6 +112,7 @@ def display_all(new_products):
                  f'Price: ${value["Price"]:.2f} | '
                  f'Stock: {value["Stock"]}'
                 )
+        print("------------------------------------------------")
 
 def load_inventory(filename = "inventory.json"):
     try:
