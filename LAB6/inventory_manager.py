@@ -1,6 +1,7 @@
 import json
 from pathlib import Path
 
+
 INVENTORY_FILE = Path(__file__).resolve().parent / "inventory.json"
 
 class Product:
