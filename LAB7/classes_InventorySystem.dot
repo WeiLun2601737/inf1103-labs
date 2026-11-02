@@ -1,0 +1,12 @@
+digraph "classes_InventorySystem" {
+rankdir=BT
+charset="utf-8"
+"classes.CanBeShipped" [color="black", fontcolor="black", label=<{CanBeShipped|<br ALIGN="LEFT"/>|<I>calculated_shipping_cost</I>()<br ALIGN="LEFT"/>}>, shape="record", style="solid"];
+"classes.DigitalProduct" [color="black", fontcolor="black", label=<{DigitalProduct|<br ALIGN="LEFT"/>|display_information()<br ALIGN="LEFT"/>get_fulfilment_info()<br ALIGN="LEFT"/>to_dictionary()<br ALIGN="LEFT"/>}>, shape="record", style="solid"];
+"classes.Inventory" [color="black", fontcolor="black", label=<{Inventory|<br ALIGN="LEFT"/>|add_product(product)<br ALIGN="LEFT"/>display_all()<br ALIGN="LEFT"/>product_id_count()<br ALIGN="LEFT"/>search_product(product_id)<br ALIGN="LEFT"/>tojsonfile()<br ALIGN="LEFT"/>}>, shape="record", style="solid"];
+"classes.PhysicalProduct" [color="black", fontcolor="black", label=<{PhysicalProduct|<br ALIGN="LEFT"/>|calculated_shipping_cost()<br ALIGN="LEFT"/>display_information()<br ALIGN="LEFT"/>get_fulfilment_info()<br ALIGN="LEFT"/>to_dictionary()<br ALIGN="LEFT"/>}>, shape="record", style="solid"];
+"classes.Product" [color="black", fontcolor="black", label=<{Product|<br ALIGN="LEFT"/>|display_information(end)<br ALIGN="LEFT"/>from_dictionary(info)<br ALIGN="LEFT"/><I>get_fulfilment_info</I>()<br ALIGN="LEFT"/>to_dictionary()<br ALIGN="LEFT"/>update_stock(quantity)<br ALIGN="LEFT"/>}>, shape="record", style="solid"];
+"classes.DigitalProduct" -> "classes.Product" [arrowhead="empty", arrowtail="none"];
+"classes.PhysicalProduct" -> "classes.CanBeShipped" [arrowhead="empty", arrowtail="none"];
+"classes.PhysicalProduct" -> "classes.Product" [arrowhead="empty", arrowtail="none"];
+}
