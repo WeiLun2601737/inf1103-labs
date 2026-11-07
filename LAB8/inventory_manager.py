@@ -21,6 +21,13 @@ def menu():
 
 def add_product(inventory):
     product_id = inventory.product_id_count()
+
+    print("\nSupplier Information")
+    supplier_id = input("Supplier ID: ").strip()
+    supplier_name = input("Supplier Name: ").strip()
+    supplier_email = input("Supplier Email: ").strip()
+    supplier = Supplier(supplier_id, supplier_name, supplier_email)
+
     print("\nAdd New Product")
     print("Product ID:", product_id)
     print("1. Physical Product")
@@ -87,9 +94,9 @@ def add_product(inventory):
                 print("Enter a valid number")
 
     if option == '1':
-        product = PhysicalProduct(product_id, name, price, stock, weight)
+        product = PhysicalProduct(product_id, name, price, stock, weight, supplier)
     elif option == '2':
-        product = DigitalProduct(product_id, name, price, stock, megabytes)
+        product = DigitalProduct(product_id, name, price, stock, megabytes, supplier)
 
     inventory.add_product(product)
     print("Product added successfully!")
@@ -97,7 +104,7 @@ def add_product(inventory):
 def update_stock(inventory):
 
     product_id = input("Enter Product ID: ").strip().upper()
-    product = inventory.search_product(product_id)
+    product = inventory.find_product(product_id)
     if product is None:
         print("Product ID not found.")
         return
@@ -121,7 +128,7 @@ def update_stock(inventory):
 
 def search_product(inventory):
     product_id = input("Enter Product ID: ").strip().upper()
-    product = inventory.search_product(product_id)
+    product = inventory.find_product(product_id)
 
     if product is None:
         print("Product not found.")

@@ -35,18 +35,33 @@ class Product(ABC):
             "ID": self.__product_id,
             "Name": self.__name,
             "Price": self.__price,
-            "Stock": self.__stock
+            "Stock": self.__stock,
+            "Supplier": {
+                "ID": self.supplier.supplier_id,
+                "Name": self.supplier.name,
+                "Email": self.supplier.contact_email
+            }
         }
 
     @classmethod
     def from_dictionary(cls, info: dict) -> "Product":  # Takes Data from Json and converts it into a Python Object
+        
+        supplier_info = info.get("Supplier")
+
+        supplier = Supplier(
+            supplier_info["ID"],
+            supplier_info["Name"],
+            supplier_info["Email"]
+        )
+        
         if info["Type"] == "Physical":
             return PhysicalProduct(
                 info["ID"],
                 info["Name"],
                 info["Price"],
                 info["Stock"],
-                info["Weight"]
+                info["Weight"],
+                supplier
             )
         elif info["Type"] == "Digital":
             return DigitalProduct(
@@ -54,7 +69,8 @@ class Product(ABC):
                 info["Name"],
                 info["Price"],
                 info["Stock"],
-                info["Megabytes"]
+                info["Megabytes"],
+                supplier
             )
         else:
             raise ValueError("Unknown Product type")
@@ -92,6 +108,9 @@ class Inventory():
 
         for product in self.__products:
             product.display_information()
+            print("Supplier Information:")
+            product.supplier.display_information()
+            print()
 
         print("-" * 70) #"line"
 
